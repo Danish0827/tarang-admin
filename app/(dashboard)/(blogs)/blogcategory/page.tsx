@@ -4,7 +4,6 @@ import LoadingSkeleton from '@/components/loading-skeleton'
 import { Input } from '@/components/ui/input'
 import BlogCategory from '@/components/table/blog-category'
 import { Button } from '@/components/ui/button'
-import { handleBlogCategoryAction } from './actions'
 import BlogCategoryFields from '@/components/shared/BlogCategoryFields'
 
 const page = () => {

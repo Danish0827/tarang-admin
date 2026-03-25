@@ -31,7 +31,7 @@ export const ourFileRouter = {
       // console.log("Upload complete for userId:", metadata.userId);
       // console.log("file url:", file.ufsUrl);
       try {
-        const res = await fetch("http://localhost:5000/api/images", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/images`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

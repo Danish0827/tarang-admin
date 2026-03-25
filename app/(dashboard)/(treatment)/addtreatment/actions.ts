@@ -5,7 +5,6 @@ import { addTreatment, deleteTreatment, updateTreatment } from "./api";
 import { redirect } from "next/navigation";
 
 export async function handleTreatmentAction(
-  prevState: { success: boolean; message: string },
   formData: FormData
 ): Promise<{ success: boolean; message: string }> {
 

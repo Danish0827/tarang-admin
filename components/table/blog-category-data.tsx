@@ -24,11 +24,15 @@ const BlogCategoryData = ({
 }) => {
     const [modalType, setModalType] = useState<null | "view" | "edit" | "delete">(null);
     const [selectedItem, setSelectedItem] = useState<categoryData | null>(null);
-    const initialState = { success: false, message: "" };
-     const [state, formAction] = useActionState(
-        handleBlogCategoryAction,
-        initialState
-    );
+  const [state, setState] = useState({
+  success: false,
+  message: ""
+});
+
+const formAction = async (formData:any) => {
+  const result = await handleBlogCategoryAction(formData);
+  setState(result);
+};
 
     useEffect(() => {
         if (state?.message) {
@@ -191,8 +195,12 @@ const BlogCategoryData = ({
                 width={520}
             >
                 <form
-                    action={formAction}
-                >
+  onSubmit={async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    await formAction(formData);
+  }}
+>
                     <div className="grid gap-x-5">
                         <Input
                             type="hidden"

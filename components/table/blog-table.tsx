@@ -22,11 +22,17 @@ import { Input } from "../ui/input";
 const AllBlogTable = ({ blogs }: any) => {
     const [modalType, setModalType] = useState<null | "view" | "edit" | "delete">(null);
     const [selectedItem, setSelectedItem] = useState<any | null>(null);
-    const initialState = { success: false, message: "" };
-    const [state, formAction] = useActionState(
-        handleBlogAction,
-        initialState
-    );
+    // const initialState = { success: false, message: "" };
+    const [state, setState] = useState({
+            success: false,
+            message: ""
+        });
+    
+        const formAction = async (formData :any
+        ) => {
+            const result = await handleBlogAction(formData);
+            setState(result);
+        };
 
     useEffect(() => {
         if (state?.message) {
@@ -170,7 +176,11 @@ const AllBlogTable = ({ blogs }: any) => {
                 width={520}
             >
                 <form
-                    action={formAction}
+                    onSubmit={async (e) => {
+                        e.preventDefault();
+                        const formData = new FormData(e.currentTarget);
+                        await formAction(formData);
+                    }}
                 >
                     <div className="grid gap-x-5">
                         <Input

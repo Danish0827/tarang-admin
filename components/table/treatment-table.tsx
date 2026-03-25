@@ -23,11 +23,20 @@ import { handleTreatmentAction } from "@/app/(dashboard)/(treatment)/addtreatmen
 const AllTreatmentTable = ({ treatment }: any) => {
     const [modalType, setModalType] = useState<null | "view" | "edit" | "delete">(null);
     const [selectedItem, setSelectedItem] = useState<any | null>(null);
-    const initialState = { success: false, message: "" };
-    const [state, formAction] = useActionState(
-        handleTreatmentAction,
-        initialState
-    );
+    // const initialState = { success: false, message: "" };
+    // const [state, formAction] = useActionState(
+    //     handleTreatmentAction,
+    //     initialState
+    // );
+    const [state, setState] = useState({
+        success: false,
+        message: ""
+    });
+
+    const formAction = async (formData: any) => {
+        const result = await handleTreatmentAction(formData);
+        setState(result);
+    };
 
     useEffect(() => {
         if (state?.message) {
@@ -171,7 +180,11 @@ const AllTreatmentTable = ({ treatment }: any) => {
                 width={520}
             >
                 <form
-                    action={formAction}
+                    onSubmit={async (e) => {
+                        e.preventDefault();
+                        const formData = new FormData(e.currentTarget);
+                        await formAction(formData);
+                    }}
                 >
                     <div className="grid gap-x-5">
                         <Input
@@ -187,7 +200,7 @@ const AllTreatmentTable = ({ treatment }: any) => {
                     </div>
                     <div className="border-b pb-4 mb-4">
                         <h2 className="text-xl font-semibold text-neutral-800">
-                            Confirm Delete 
+                            Confirm Delete
                         </h2>
                     </div>
                     <p className="text-center text-base">Are you sure you want to delete {selectedItem?.title}?</p>

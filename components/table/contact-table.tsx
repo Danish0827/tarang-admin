@@ -23,11 +23,16 @@ import ImageFormFields from "../shared/ImageFormFields";
 const AllContactTable = ({ contact }: any) => {
     const [modalType, setModalType] = useState<null | "view" | "edit" | "delete">(null);
     const [selectedItem, setSelectedItem] = useState<any | null>(null);
-    const initialState = { success: false, message: "" };
-    const [state, formAction] = useActionState(
-        handleContactAction,
-        initialState
-    );
+    const [state, setState] = useState({
+        success: false,
+        message: ""
+    });
+
+    const formAction = async (formData :any
+    ) => {
+        const result = await handleContactAction(formData);
+        setState(result);
+    };
 
     useEffect(() => {
         if (state?.message) {
@@ -48,7 +53,7 @@ const AllContactTable = ({ contact }: any) => {
         "bg-pink-500",
         "bg-indigo-500",
     ];
-console.log(selectedItem,"selectedItem");
+    console.log(selectedItem, "selectedItem");
 
     return (
         <>
@@ -169,7 +174,7 @@ console.log(selectedItem,"selectedItem");
                     })}
                 </TableBody>
             </Table>
-             <Modal
+            <Modal
                 title={null}
                 open={modalType === "view"}
                 onCancel={() => { setModalType(null); setSelectedItem(null) }}
@@ -183,7 +188,7 @@ console.log(selectedItem,"selectedItem");
                             View Details
                         </h2>
                     </div>
-                     <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div className="grid grid-cols-2 gap-4 text-sm">
 
                         <div className="bg-neutral-50 dark:bg-neutral-800 p-3 rounded-xl">
                             <p className="text-neutral-500 text-xs mb-1">Name</p>
@@ -239,7 +244,11 @@ console.log(selectedItem,"selectedItem");
                 width={520}
             >
                 <form
-                    action={formAction}
+                    onSubmit={async (e) => {
+                        e.preventDefault();
+                        const formData = new FormData(e.currentTarget);
+                        await formAction(formData);
+                    }}
                 >
                     <div className="grid gap-x-5">
                         <Input

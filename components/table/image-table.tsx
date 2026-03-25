@@ -30,11 +30,17 @@ interface categoryData {
 const AllImageTable = ({ images }: any) => {
     const [modalType, setModalType] = useState<null | "view" | "edit" | "delete">(null);
     const [selectedItem, setSelectedItem] = useState<any | null>(null);
-    const initialState = { success: false, message: "" };
-    const [state, formAction] = useActionState(
-        handleImageAction,
-        initialState
-    );
+    // const initialState = { success: false, message: "" };
+    // const [state, formAction] = useActionState(
+    //     handleImageAction,
+    //     initialState
+    // );
+    const [state, setState] = useState({ success: false, message: "" });
+
+const formAction = async (formData:any) => {
+  const result = await handleImageAction(formData);
+  setState(result);
+};
 
     useEffect(() => {
         if (state?.message) {
@@ -194,7 +200,13 @@ const AllImageTable = ({ images }: any) => {
                 footer={null}
                 width={1024}
             >
-                <form action={formAction}>
+                <form
+  onSubmit={async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    await formAction(formData);
+  }}
+>
                     <div>
                         <div className="grid gap-x-5">
                             <Input
@@ -240,8 +252,12 @@ const AllImageTable = ({ images }: any) => {
                 width={520}
             >
                 <form
-                    action={formAction}
-                >
+  onSubmit={async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    await formAction(formData);
+  }}
+>
                     <div className="grid gap-x-5">
                         <Input
                             type="hidden"

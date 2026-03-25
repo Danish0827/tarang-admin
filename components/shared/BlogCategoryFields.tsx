@@ -61,12 +61,15 @@ export default function BlogCategoryFields({
         setSlug(e.target.value);
         setSlugEdited(true);
     };
-    const initialState = { success: false, message: "" };
+    const [state, setState] = useState({
+        success: false,
+        message: ""
+    });
 
-    const [state, formAction] = useActionState(
-        handleBlogCategoryAction,
-        initialState
-    );
+    const formAction = async (formData: any) => {
+        const result = await handleBlogCategoryAction(formData);
+        setState(result);
+    };
 
     useEffect(() => {
         if (state?.message) {
@@ -84,7 +87,11 @@ export default function BlogCategoryFields({
     return (
         <>
             <form
-                action={formAction}
+                onSubmit={async (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(e.currentTarget);
+                    await formAction(formData);
+                }}
             >
                 <DefaultCardComponent title={`${type} Category`}>
                     <div className="grid gap-x-5">

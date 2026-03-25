@@ -4,9 +4,8 @@ import { revalidatePath } from "next/cache";
 import { deleteContact } from "./api";
 
 export async function handleContactAction(
-  prevState: any,
   formData: FormData
-) {
+): Promise<{ success: boolean; message: string }> {
   const id = formData.get("id")?.toString();
 
   if (!id) {

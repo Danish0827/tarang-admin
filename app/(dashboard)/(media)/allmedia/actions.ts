@@ -7,7 +7,6 @@ import {
 import { revalidatePath } from "next/cache";
 
 export async function handleImageAction(
-  prevState: { success: boolean; message: string },
   formData: FormData
 ): Promise<{ success: boolean; message: string }> {
   const actionType = formData.get("action")?.toString();

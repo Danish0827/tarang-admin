@@ -88,10 +88,21 @@ const AddBlog = ({ blogCategory, singleBlog, type }: any) => {
     }, [type]);
 
     // ✅ ACTION
-    const [state, formAction] = useActionState(handleBlogAction, {
-        success: false,
-        message: ""
-    });
+    // const [state, formAction] = useActionState(handleBlogAction, {
+    //     success: false,
+    //     message: ""
+    // });
+    const [state, setState] = useState({
+            success: false,
+            message: ""
+        });
+    
+        const formAction = async (formData :any
+        ) => {
+            const result = await handleBlogAction(formData);
+            setState(result);
+        };
+    
 
     useEffect(() => {
         if (state?.message) {
@@ -118,7 +129,13 @@ const AddBlog = ({ blogCategory, singleBlog, type }: any) => {
                 text="Blog"
             />
 
-            <form action={formAction}>
+            <form
+                    onSubmit={async (e) => {
+                        e.preventDefault();
+                        const formData = new FormData(e.currentTarget);
+                        await formAction(formData);
+                    }}
+                >
                 <Input type="hidden" name="action" value={type === 'edit' ? 'edit' : 'add'} />
                 <Input type="hidden" name="id" value={singleBlog?.id || ""} />
                 <Input type="hidden" name="category_ids" value={JSON.stringify(categories)} />

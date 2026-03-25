@@ -26,7 +26,7 @@ import { redirect, useRouter } from 'next/navigation'
 //  useEffect(() => {
 // async function LoginPage() {
 //   async function getUser() {
-//   const res = await fetch("http://localhost:5000/api/auth/me", {
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/me`, {
 //     credentials: "include",
 //     cache: "no-store"
 //   });
@@ -65,7 +65,7 @@ const LoginForm = () => {
     startTransition(async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/auth/login",
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
           {
             method: "POST",
             headers: {

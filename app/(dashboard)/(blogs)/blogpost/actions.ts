@@ -5,7 +5,6 @@ import { addBlog, deleteBlog, updateBlog } from "./api";
 import { redirect } from "next/navigation";
 
 export async function handleBlogAction(
-  prevState: { success: boolean; message: string },
   formData: FormData
 ): Promise<{ success: boolean; message: string }> {
 

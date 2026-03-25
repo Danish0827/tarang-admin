@@ -93,10 +93,15 @@ const AddTreatment = ({ singleData, type }: any) => {
     canonical: ""
   })
 
-  const [state, formAction] = useActionState(handleTreatmentAction, {
+  const [state, setState] = useState({
     success: false,
     message: ""
-  })
+  });
+
+  const formAction = async (formData: any) => {
+    const result = await handleTreatmentAction(formData);
+    setState(result);
+  };
 
   useEffect(() => {
     if (singleData?.data) {
@@ -130,20 +135,20 @@ const AddTreatment = ({ singleData, type }: any) => {
       <Tabs defaultValue="seo">
         <TabsList className="bg-white/60 backdrop-blur-md border border-neutral-200 px-3 py-4 h-20 rounded-2xl flex flex-wrap items-center gap-2 shadow-sm">
 
-  {[
-    "seo",
-    "breadcrumb",
-    "intro",
-    "treatment",
-    "cards",
-    "curable",
-    "faq",
-    "cta"
-  ].map((tab) => (
-    <TabsTrigger
-      key={tab}
-      value={tab}
-      className="
+          {[
+            "seo",
+            "breadcrumb",
+            "intro",
+            "treatment",
+            "cards",
+            "curable",
+            "faq",
+            "cta"
+          ].map((tab) => (
+            <TabsTrigger
+              key={tab}
+              value={tab}
+              className="
         px-6 py-3 text-sm font-semibold rounded-xl
         transition-all duration-200
         hover:bg-primary/10
@@ -151,12 +156,12 @@ const AddTreatment = ({ singleData, type }: any) => {
         data-[state=active]:text-white
         data-[state=active]:shadow-md uppercase
       "
-    >
-      {tab}
-    </TabsTrigger>
-  ))}
+            >
+              {tab}
+            </TabsTrigger>
+          ))}
 
-</TabsList>
+        </TabsList>
 
         <TabsContent value="seo">
           <DefaultCardComponent title="SEO">
