@@ -58,42 +58,44 @@ const LoginForm = () => {
 
   const router = useRouter();
 
-  const onSubmit = (values: z.infer<typeof loginSchema>) => {
+ const onSubmit = async (values: z.infer<typeof loginSchema>) => {
+  try {
     setLoading(true);
     setIsSubmitting(true);
 
-    startTransition(async () => {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-            body: JSON.stringify(values),
-          }
-        );
-
-        const data = await response.json();
-        console.log(data, "sasas");
-
-        if (!response.ok) {
-          toast.error(data.error);
-          return;
-        }
-
-        toast.success("Login successful!");
-        router.push("/dashboard"); 
-      } catch (error) {
-        toast.error("Something went wrong. Please try again.");
-      } finally {
-        setLoading(false);
-        setIsSubmitting(false);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(values),
       }
-    });
-  };
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      toast.error(data.error);
+      return;
+    }
+
+    toast.success("Login successful!");
+
+    // 🔥 important: thoda delay ya refresh
+    setTimeout(() => {
+      router.push("/dashboard");
+    }, 200);
+
+  } catch (error) {
+    toast.error("Something went wrong. Please try again.");
+  } finally {
+    setLoading(false);
+    setIsSubmitting(false);
+  }
+};
 
   // const 
 
