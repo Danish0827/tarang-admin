@@ -177,12 +177,12 @@ const LoginForm = () => {
                 Remember me
               </label>
             </div>
-            <Link
+            {/* <Link
               href="/auth/forgot-password"
               className="text-primary font-medium hover:underline text-sm"
             >
               Forgot Password?
-            </Link>
+            </Link> */}
           </div>
 
           {/* Submit Button */}
@@ -204,17 +204,17 @@ const LoginForm = () => {
       </Form>
 
       {/* Divider */}
-      <div className="mt-8 relative text-center before:absolute before:w-full before:h-px before:bg-neutral-300 dark:before:bg-slate-600 before:top-1/2 before:left-0">
+      {/* <div className="mt-8 relative text-center before:absolute before:w-full before:h-px before:bg-neutral-300 dark:before:bg-slate-600 before:top-1/2 before:left-0">
         <span className="relative z-10 px-4 bg-white dark:bg-slate-900 text-base">
           Or sign in with
         </span>
-      </div>
+      </div> */}
 
       {/* Social Login */}
       {/* <SocialLogin /> */}
 
       {/* Signup Prompt */}
-      <div className="mt-8 text-center text-sm">
+      {/* <div className="mt-8 text-center text-sm">
         <p>
           Don&apos;t have an account?{' '}
           <Link
@@ -224,7 +224,7 @@ const LoginForm = () => {
             Sign Up
           </Link>
         </p>
-      </div>
+      </div> */}
     </>
   )
 }
