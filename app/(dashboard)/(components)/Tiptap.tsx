@@ -190,7 +190,7 @@ const ToolBar = ({ editor }: { editor: Editor }) => {
   return (
     <div
       className={
-        "bg-background sticky top-0 z-10 flex flex-wrap items-center gap-1 border-b p-2 !bg-white dark:!bg-[#273141] dark:border-slate-500 rounded-t-lg"
+        "bg-background sticky top-0 z-0 flex flex-wrap items-center gap-1 border-b p-2 !bg-white dark:!bg-[#273141] dark:border-slate-500 rounded-t-lg"
       }
     >
       <Select

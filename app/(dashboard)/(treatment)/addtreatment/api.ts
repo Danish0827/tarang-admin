@@ -74,16 +74,19 @@ export async function deleteTreatment(id: number) {
 
 
 // ✅ GET ALL
-export async function getAllTreatments() {
+export async function getAllTreatments(page: number, limit: number) {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("access_token")?.value;
 
-  const res = await fetch(`${BASE_URL}/api/treatment/all`, {
-    next: { revalidate: 60 },
-    headers: {
-      "Cookie": `access_token=${accessToken}`,
-    },
-  });
+  const res = await fetch(
+    `${BASE_URL}/api/treatment/all?page=${page}&limit=${limit}`,
+    {
+      cache: "no-store",
+      headers: {
+        Cookie: `access_token=${accessToken}`,
+      },
+    }
+  );
 
   return res.json();
 }

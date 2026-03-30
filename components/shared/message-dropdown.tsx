@@ -18,7 +18,7 @@ import Link from 'next/link';
 const MessageDropdown = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger >
         <Button
           size="icon"
           className={cn(

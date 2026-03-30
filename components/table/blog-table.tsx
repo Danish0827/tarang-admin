@@ -24,15 +24,15 @@ const AllBlogTable = ({ blogs }: any) => {
     const [selectedItem, setSelectedItem] = useState<any | null>(null);
     // const initialState = { success: false, message: "" };
     const [state, setState] = useState({
-            success: false,
-            message: ""
-        });
-    
-        const formAction = async (formData :any
-        ) => {
-            const result = await handleBlogAction(formData);
-            setState(result);
-        };
+        success: false,
+        message: ""
+    });
+
+    const formAction = async (formData: any
+    ) => {
+        const result = await handleBlogAction(formData);
+        setState(result);
+    };
 
     useEffect(() => {
         if (state?.message) {
@@ -92,10 +92,12 @@ const AllBlogTable = ({ blogs }: any) => {
                                                 alt={item.featured_image_alt || ""}
                                                 width={40}
                                                 height={40}
-                                                className="me-3 rounded-lg"
+                                                className="me-3 h-8 w-12 shrink-0 rounded-sm"
                                             />}
                                         <span className="text-base font-semibold text-neutral-500 dark:text-neutral-300">
-                                            {item.title}
+                                            {item.title.length > 35
+                                                ? item.title.slice(0, 35) + "..."
+                                                : item.title}
                                         </span>
                                     </div>
                                 </TableCell>
@@ -111,7 +113,10 @@ const AllBlogTable = ({ blogs }: any) => {
                                     className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
                                         }`}
                                 >
-                                    {item.slug}
+                                    {/* {item.slug} */}
+                                    {item.slug.length > 30
+                                        ? item.slug.slice(0, 30) + "..."
+                                        : item.slug}
                                 </TableCell>
                                 <TableCell
                                     className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
@@ -196,7 +201,7 @@ const AllBlogTable = ({ blogs }: any) => {
                     </div>
                     <div className="border-b pb-4 mb-4">
                         <h2 className="text-xl font-semibold text-neutral-800">
-                            Confirm Delete 
+                            Confirm Delete
                         </h2>
                     </div>
                     <p className="text-center text-base">Are you sure you want to delete {selectedItem?.title}?</p>

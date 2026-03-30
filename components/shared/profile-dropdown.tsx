@@ -31,7 +31,7 @@ const ProfileDropdown = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger >
         <Button
           variant="outline"
           size="icon"
@@ -82,15 +82,21 @@ const ProfileDropdown = () => {
 
         <div className="max-h-[400px] overflow-y-auto scroll-sm pt-4">
           <ul className="flex flex-col gap-3">
-            <li>
-              <Link
-                href="/view-profile"
+            <li className="flex items-center gap-3 justify-between">
+              <div
                 className="text-black dark:text-white hover:text-primary dark:hover:text-primary flex items-center gap-3"
               >
-                <User className="w-5 h-5" /> My Profile
-              </Link>
+                <User className="w-5 h-5" /> {user?.user_name && user?.user_name
+                ? user?.user_name
+                : "Hacker"}
+              </div>
+              <span className="text-sm text-neutral-500 dark:text-neutral-300 capitalize">
+              {user?.role && user?.role
+                ? user?.role
+                : "Hacker"}
+            </span>
             </li>
-            <li>
+            {/* <li>
               <Link
                 href="/email"
                 className="text-black dark:text-white hover:text-primary dark:hover:text-primary flex items-center gap-3"
@@ -105,7 +111,7 @@ const ProfileDropdown = () => {
               >
                 <Settings className="w-5 h-5" /> Settings
               </Link>
-            </li>
+            </li> */}
             <li>
               <Logout />
             </li>

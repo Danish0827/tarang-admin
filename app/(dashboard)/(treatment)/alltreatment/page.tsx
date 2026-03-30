@@ -11,9 +11,12 @@ import { Plus } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { getAllTreatments } from '../addtreatment/api'
 import AllTreatmentTable from '@/components/table/treatment-table'
+import PageSelect from '@/components/table/PageSelect'
 
-const page = async () => {
-    const treatment = await getAllTreatments()
+const page = async ({ searchParams }: { searchParams: { page?: string } }) => {
+    const currentPage = parseInt(searchParams.page || "1") || 1;
+
+    const treatment = await getAllTreatments(currentPage, 10)
     if (!treatment) return <>No Blog</>
     return (
         <>
@@ -21,15 +24,15 @@ const page = async () => {
                 <CardHeader className="border-b border-neutral-200 dark:border-slate-600 !py-4 px-6 flex items-center flex-wrap gap-3 justify-between">
                     <div className="flex items-center flex-wrap gap-3">
                         <span className="text-base font-medium text-neutral-500 dark:text-neutral-300 mb-0">Show</span>
-                        <CustomSelect
-                            placeholder="1"
-                            options={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]}
+                        <PageSelect 
+                        currentPage={currentPage}   
+                        totalPages={treatment.totalPages} 
                         />
-                        <SearchBox />
+                        {/* <SearchBox />
                         <CustomSelect
                             placeholder="Status"
                             options={["Status", "Active", "Inactive"]}
-                        />
+                        /> */}
                     </div>
                     <Button className={cn(`w-auto h-11`)} asChild>
                         <Link href="/addtreatment">

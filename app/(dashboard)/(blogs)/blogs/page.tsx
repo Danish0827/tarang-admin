@@ -22,13 +22,13 @@ const page = async () => {
                         <span className="text-base font-medium text-neutral-500 dark:text-neutral-300 mb-0">Show</span>
                         <CustomSelect
                             placeholder="1"
-                            options={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]}
+                            options={["1"]}
                         />
-                        <SearchBox />
+                        {/* <SearchBox />
                         <CustomSelect
                             placeholder="Status"
                             options={["Status", "Active", "Inactive"]}
-                        />
+                        /> */}
                     </div>
                     <Button className={cn(`w-auto h-11`)} asChild>
                         <Link href="/blogpost">

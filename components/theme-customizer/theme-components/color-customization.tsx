@@ -4,10 +4,10 @@ import { Check } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const colors = [
+    { name: "Violet", hex: "rgb(124, 58, 237)" },
     { name: "Blue", hex: "rgb(56, 114, 250)" },
     { name: "Black", hex: "rgb(17, 17, 17)" },
     { name: "Teal", hex: "rgb(13, 148, 136)" },
-    { name: "Violet", hex: "rgb(124, 58, 237)" },
     { name: "Rose", hex: "rgb(225, 29, 72)" },
     { name: "Yellow", hex: "rgb(202, 138, 4)" },
 ];

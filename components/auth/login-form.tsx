@@ -62,9 +62,9 @@ const LoginForm = () => {
   try {
     setLoading(true);
     setIsSubmitting(true);
-
+// ${process.env.NEXT_PUBLIC_BACKEND_URL}
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
+      `/api/auth/login`,
       {
         method: "POST",
         headers: {

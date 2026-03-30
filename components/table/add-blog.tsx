@@ -199,7 +199,7 @@ const AddBlog = ({ blogCategory, singleBlog, type }: any) => {
                                     <button
                                         onClick={async (e) => {
                                             e.preventDefault()
-                                            await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/images/${fileKey}`, {
+                                            await fetch(`/api/images/${fileKey}`, {
                                                 method: "DELETE",
                                                 headers: { "Content-Type": "application/json" }
                                             });

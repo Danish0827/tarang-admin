@@ -7,8 +7,8 @@ const page = async ({ searchParams }:any) => {
   const postslug = dataParams?.postslug
   const type = dataParams?.type
 
-  console.log("Slug:", postslug)
-  console.log("Type:", type)
+  // console.log("Slug:", postslug)
+  // console.log("Type:", type)
   const blogCategory = await getBlogCategory();
   const singleBlog = await getSingleBlog(postslug)
   return (

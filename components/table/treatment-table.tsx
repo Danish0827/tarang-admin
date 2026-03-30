@@ -90,16 +90,19 @@ const AllTreatmentTable = ({ treatment }: any) => {
                                         }`}
                                 >
                                     <div className="flex items-center">
-                                        {item?.image &&
+                                        {item?.image ?
                                             <img
                                                 src={item?.image}
                                                 alt={item?.title || ""}
                                                 width={40}
                                                 height={40}
-                                                className="me-3 rounded-lg"
-                                            />}
+                                                className="me-3 h-8 w-12 shrink-0 rounded-sm"
+                                            /> : 
+                                            <div className="me-3 h-8 w-12 shrink-0 rounded-sm flex justify-center items-center border text-gray-500 text-sm">NA</div>}
                                         <span className="text-base font-semibold text-neutral-500 dark:text-neutral-300">
-                                            {item.title}
+                                             {item.title.length > 35
+                                                ? item.title.slice(0, 35) + "..."
+                                                : item.title}
                                         </span>
                                     </div>
                                 </TableCell>
@@ -115,7 +118,9 @@ const AllTreatmentTable = ({ treatment }: any) => {
                                     className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
                                         }`}
                                 >
-                                    {item.slug}
+                                    {item.slug.length > 30
+                                        ? item.slug.slice(0, 30) + "..."
+                                        : item.slug}
                                 </TableCell>
                                 {/* <TableCell
                                     className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
