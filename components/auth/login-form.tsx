@@ -84,10 +84,10 @@ const LoginForm = () => {
 
     toast.success("Login successful!");
 
-    // 🔥 important: thoda delay ya refresh
-    setTimeout(() => {
-      router.push("/dashboard");
-    }, 200);
+   setTimeout(() => {
+  router.push("/dashboard");
+  router.refresh(); 
+}, 200);
 
   } catch (error) {
     toast.error("Something went wrong. Please try again.");

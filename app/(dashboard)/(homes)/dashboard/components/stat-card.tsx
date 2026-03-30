@@ -60,7 +60,7 @@ const cardsDatas: CardData[] = [
   },
   {
     title: "Total Leads",
-    value: contacts?.total,
+    value: contacts?.contacts?.length,
     icon: Wallet,
     iconBg: "bg-green-600",
     gradientFrom: "from-green-600/10",
@@ -71,7 +71,7 @@ const cardsDatas: CardData[] = [
   },
   {
     title: "Total Images Uploaded",
-    value: images?.total,
+    value: images?.images?.length,
     icon: FileText,
     iconBg: "bg-red-600",
     gradientFrom: "from-red-600/10",
