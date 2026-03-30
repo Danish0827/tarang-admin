@@ -49,11 +49,11 @@ const UploadFile = () => {
                                     alt="Uploaded"
                                     className="h-60 w-60 rounded-lg object-cover"
                                 />
-{/* ${process.env.NEXT_PUBLIC_BACKEND_URL} */}
+
                                 <button
                                     onClick={async (e) => {
                                         e.preventDefault()
-                                        await fetch(`/api/images/${fileKey}`, {
+                                        await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/images/${fileKey}`, {
                                             method: "DELETE",
                                             headers: { "Content-Type": "application/json" }
                                         });

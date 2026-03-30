@@ -21,57 +21,13 @@ const metadata: Metadata = {
 export default async function DashboardPage() {
   return (
     <>
-      <DashboardBreadcrumb title="AI" text="AI" />
+      <DashboardBreadcrumb title="Dashboard" text="Home" />
 
       <Suspense fallback={<LoadingSkeleton />}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
           <StatCard />
         </div>
       </Suspense>
-
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 mt-6">
-        <div className="xl:col-span-12 2xl:col-span-6">
-          <Suspense fallback={<LoadingSkeleton />}>
-            <SalesStaticCard />
-          </Suspense>
-        </div>
-
-        <div className="xl:col-span-6 2xl:col-span-3">
-          <Suspense fallback={<LoadingSkeleton />}>
-            <TotalSubscriberCard />
-          </Suspense>
-        </div>
-
-        <div className="xl:col-span-6 2xl:col-span-3">
-          <Suspense fallback={<LoadingSkeleton />}>
-            <UserOverviewCard />
-          </Suspense>
-        </div>
-
-        <div className="xl:col-span-12 2xl:col-span-9">
-          <Suspense fallback={<LoadingSkeleton />}>
-            <TabsWithTableCard />
-          </Suspense>
-        </div>
-
-        <div className="xl:col-span-12 2xl:col-span-3">
-          <Suspense fallback={<LoadingSkeleton />}>
-            <TopPerformerCard />
-          </Suspense>
-        </div>
-
-        <div className="xl:col-span-12 2xl:col-span-6">
-          <Suspense fallback={<LoadingSkeleton />}>
-            <TopCountriesCard />
-          </Suspense>
-        </div>
-
-        <div className="xl:col-span-12 2xl:col-span-6">
-          <Suspense fallback={<LoadingSkeleton />}>
-            <GenerateContentCard />
-          </Suspense>
-        </div>
-      </div>
     </>
   );
 }

@@ -133,8 +133,17 @@ const AddTreatment = ({ singleData, type }: any) => {
       </DefaultCardComponent>
 
       <Tabs defaultValue="seo">
-        <TabsList className="bg-white/60 backdrop-blur-md border border-neutral-200 px-3 py-4 h-20 rounded-2xl flex flex-wrap items-center gap-2 shadow-sm">
-
+        <TabsList
+          className="
+    bg-white/60 dark:bg-slate-600 mb-3
+    backdrop-blur-md
+    border border-neutral-200 dark:border-slate-700
+    px-3 py-4 h-20
+    rounded-2xl
+    flex flex-wrap items-center gap-2
+    shadow-sm dark:shadow-none
+  "
+        >
           {[
             "seo",
             "breadcrumb",
@@ -148,19 +157,15 @@ const AddTreatment = ({ singleData, type }: any) => {
             <TabsTrigger
               key={tab}
               value={tab}
-              className="
-        px-6 py-3 text-sm font-semibold rounded-xl
-        transition-all duration-200
-        hover:bg-primary/10
+              className="px-6 py-3 text-sm font-semibold rounded-xl uppercase transition-all duration-200 text-neutral-700 dark:text-neutral-300 hover:bg-primary/10 dark:hover:bg-primary/20
         data-[state=active]:bg-primary
         data-[state=active]:text-white
-        data-[state=active]:shadow-md uppercase
+        data-[state=active]:shadow-md
       "
             >
               {tab}
             </TabsTrigger>
           ))}
-
         </TabsList>
 
         <TabsContent value="seo">

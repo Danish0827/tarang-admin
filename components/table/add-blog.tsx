@@ -162,8 +162,9 @@ const AddBlog = ({ blogCategory, singleBlog, type }: any) => {
                             value={categories}
                             onChange={(val) => setCategories(val)}
                             options={options}
+                            placeholder="Select Category"
                             style={{ width: "100%", marginBottom: 20 }}
-                            className="!border !bg-white dark:!bg-[#273141] placeholder:!text-gray-800 dark:placeholder:!text-gray-300 border-neutral-300 dark:!border-slate-500 !px-2 !items-center !dark:border-slate-500 !focus:border-primary !dark:focus:border-primary !focus-visible:border-primary !h-12 !rounded-lg !shadow-none !ring-0"
+                            className="!border !bg-white dark:!bg-[#273141] placeholder:text-gray-800! dark:text-neutral-400! dark:placeholder:text-gray-300! border-neutral-300 dark:!border-slate-500 !px-2 !items-center !dark:border-slate-500 !focus:border-primary !dark:focus:border-primary !focus-visible:border-primary !h-12 !rounded-lg !shadow-none !ring-0"
                         />
                         <Select
                             value={status}
@@ -174,7 +175,7 @@ const AddBlog = ({ blogCategory, singleBlog, type }: any) => {
                                 { value: "published", label: "Published" },
                             ]}
                             style={{ width: "100%", marginBottom: 20 }}
-                            className="!border !bg-white dark:!bg-[#273141] placeholder:!text-gray-800 dark:placeholder:!text-gray-300 border-neutral-300 dark:!border-slate-500 !px-2 !items-center !dark:border-slate-500 !focus:border-primary !dark:focus:border-primary !focus-visible:border-primary !h-12 !rounded-lg !shadow-none !ring-0"
+                            className="!border !bg-white dark:!bg-[#273141] placeholder:!text-gray-800 dark:!text-neutral-400 border-neutral-300 dark:!border-slate-500 !px-2 !items-center !dark:border-slate-500 !focus:border-primary !dark:focus:border-primary !focus-visible:border-primary !h-12 !rounded-lg !shadow-none !ring-0"
                         />
                     </div>
                     <div className={`lg:grid md:grid-cols-[50%_45%]  gap-5 items-center mb-5`}>
@@ -199,7 +200,7 @@ const AddBlog = ({ blogCategory, singleBlog, type }: any) => {
                                     <button
                                         onClick={async (e) => {
                                             e.preventDefault()
-                                            await fetch(`/api/images/${fileKey}`, {
+                                            await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/images/${fileKey}`, {
                                                 method: "DELETE",
                                                 headers: { "Content-Type": "application/json" }
                                             });

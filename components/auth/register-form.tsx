@@ -36,13 +36,13 @@ const RegisterForm = () => {
       password: "",
     },
   });
-// ${process.env.NEXT_PUBLIC_BACKEND_URL}
+
   const handleRegisterFormSubmit = async (
     values: z.infer<typeof registerSchema>
   ) => {
     setLoading(true);
     setIsSubmitting(true)
-    const response = await fetch(`/api/users`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

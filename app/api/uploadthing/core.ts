@@ -30,9 +30,8 @@ export const ourFileRouter = {
     .onUploadComplete(async ({ metadata, file }) => {
       // console.log("Upload complete for userId:", metadata.userId);
       // console.log("file url:", file.ufsUrl);
-      // ${process.env.NEXT_PUBLIC_BACKEND_URL}
       try {
-        const res = await fetch(`/api/images`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/images`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -48,7 +47,6 @@ export const ourFileRouter = {
           }),
         });
         const data = await res.json();
-        // console.log("DB Saved:", data);
       } catch (error) {
         console.error("DB save error:", error);
       }
