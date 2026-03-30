@@ -211,7 +211,7 @@ const AddTreatment = ({ singleData, type }: any) => {
                       <button
                         onClick={async (e) => {
                           e.preventDefault()
-                          await fetch(`/api/images/${data.breadcrumb.fileKey}`, {
+                          await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/images/${data.breadcrumb.fileKey}`, {
                             method: "DELETE",
                             headers: { "Content-Type": "application/json" }
                           });
@@ -266,7 +266,7 @@ const AddTreatment = ({ singleData, type }: any) => {
                       <button
                         onClick={async (e) => {
                           e.preventDefault()
-                          await fetch(`/api/images/${data.intro.fileKey}`, {
+                          await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/images/${data.intro.fileKey}`, {
                             method: "DELETE",
                             headers: { "Content-Type": "application/json" }
                           });
@@ -351,7 +351,7 @@ const AddTreatment = ({ singleData, type }: any) => {
                           <button
                             onClick={async (e) => {
                               e.preventDefault()
-                              await fetch(`/api/images/${item.fileKey}`, {
+                              await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/images/${item.fileKey}`, {
                                 method: "DELETE",
                                 headers: { "Content-Type": "application/json" }
                               });
@@ -595,7 +595,7 @@ const AddTreatment = ({ singleData, type }: any) => {
                               <button
                                 onClick={async (e) => {
                                   e.preventDefault()
-                                  await fetch(`/api/images/${item.fileKey}`, {
+                                  await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/images/${item.fileKey}`, {
                                     method: "DELETE",
                                     headers: { "Content-Type": "application/json" }
                                   });

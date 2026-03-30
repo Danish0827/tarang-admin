@@ -16,7 +16,7 @@ export const userVerify = async () => {
 
     // Function to fetch user data with access token
     const fetchMe = async (token: string) => {
-      return fetch(`/api/auth/me`, {
+      return fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/me`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`, // send token in header
@@ -34,7 +34,7 @@ export const userVerify = async () => {
 
       // Refresh token request
       const refreshRes = await fetch(
-        `/api/auth/refresh_token`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/refresh_token`,
         {
           method: "POST",
           headers: {

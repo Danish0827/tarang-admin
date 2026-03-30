@@ -15,12 +15,12 @@
 //   useEffect(() => {
 //     const verifyUser = async () => {
 //       try {
-//         let res = await fetch(`/api/auth/me`, {
+//         let res = await fetch(`${BASE_URL}/api/auth/me`, {
 //           method: "GET",
 //           credentials: "include",
 //         });
 //         if (res.status === 401 || res.status === 403) {
-//           const refreshRes = await fetch(`/api/auth/refresh_token`, {
+//           const refreshRes = await fetch(`${BASE_URL}/api/auth/refresh_token`, {
 //             method: "POST",
 //             credentials: "include",
 //           });
@@ -29,7 +29,7 @@
 //             router.replace("/auth/login");
 //             return;
 //           }
-//           res = await fetch(`/api/auth/me`, {
+//           res = await fetch(`${BASE_URL}/api/auth/me`, {
 //             method: "GET",
 //             credentials: "include",
 //           });
@@ -64,7 +64,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "./user-context";
 
-// const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL!;
+const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL!;
 
 export default function AuthGuard({ children }: any) {
 
@@ -76,13 +76,13 @@ export default function AuthGuard({ children }: any) {
 
     const verify = async () => {
 
-      let res = await fetch(`/api/auth/me`, {
+      let res = await fetch(`${BASE_URL}/api/auth/me`, {
         credentials: "include",
       });
 
       if (res.status === 401) {
 
-        const refresh = await fetch(`/api/auth/refresh_token`, {
+        const refresh = await fetch(`${BASE_URL}/api/auth/refresh_token`, {
           method: "POST",
           credentials: "include",
         });
@@ -92,7 +92,7 @@ export default function AuthGuard({ children }: any) {
           return;
         }
 
-        res = await fetch(`/api/auth/me`, {
+        res = await fetch(`${BASE_URL}/api/auth/me`, {
           credentials: "include",
         });
       }

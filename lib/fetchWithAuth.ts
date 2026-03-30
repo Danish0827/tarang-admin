@@ -8,7 +8,7 @@ async function refreshToken() {
     isRefreshing = true;
 
     refreshPromise = fetch(
-      `/api/auth/refresh_token`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/refresh_token`,
       {
         method: "POST",
         credentials: "include",
