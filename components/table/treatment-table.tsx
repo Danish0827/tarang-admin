@@ -97,10 +97,10 @@ const AllTreatmentTable = ({ treatment }: any) => {
                                                 width={40}
                                                 height={40}
                                                 className="me-3 h-8 w-12 shrink-0 rounded-sm"
-                                            /> : 
+                                            /> :
                                             <div className="me-3 h-8 w-12 shrink-0 rounded-sm flex justify-center items-center border text-gray-500 text-sm">NA</div>}
                                         <span className="text-base font-semibold text-neutral-500 dark:text-neutral-300">
-                                             {item.title.length > 35
+                                            {item.title.length > 35
                                                 ? item.title.slice(0, 35) + "..."
                                                 : item.title}
                                         </span>
@@ -191,31 +191,33 @@ const AllTreatmentTable = ({ treatment }: any) => {
                         await formAction(formData);
                     }}
                 >
-                    <div className="grid gap-x-5">
-                        <Input
-                            type="hidden"
-                            name="action"
-                            value="delete"
-                        />
-                        <Input
-                            type="hidden"
-                            name="id"
-                            value={selectedItem?.id}
-                        />
-                    </div>
-                    <div className="border-b pb-4 mb-4">
-                        <h2 className="text-xl font-semibold text-neutral-800">
-                            Confirm Delete
-                        </h2>
-                    </div>
-                    <p className="text-center text-base">Are you sure you want to delete {selectedItem?.title}?</p>
-                    <div className="col-span-2 flex items-center justify-center gap-3 mt-6">
-                        <Button
-                            type="submit"
-                            className="h-10 w-32 bg-red-600 hover:bg-red-700 text-white text-base rounded-lg"
-                        >
-                            Delete
-                        </Button>
+                    <div className="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 p-6 dark:border rounded-md">
+                        <div className="grid gap-x-5">
+                            <Input
+                                type="hidden"
+                                name="action"
+                                value="delete"
+                            />
+                            <Input
+                                type="hidden"
+                                name="id"
+                                value={selectedItem?.id}
+                            />
+                        </div>
+                        <div className="border-b border-neutral-200 dark:border-neutral-700 pb-4 mb-4">
+                            <h2 className="text-xl font-semibold">
+                                Confirm Delete
+                            </h2>
+                        </div>
+                        <p className="text-center text-base">Are you sure you want to delete {selectedItem?.title}?</p>
+                        <div className="col-span-2 flex items-center justify-center gap-3 mt-6">
+                            <Button
+                                type="submit"
+                                className="h-10 w-32 bg-red-600 hover:bg-red-700 text-white text-base rounded-lg"
+                            >
+                                Delete
+                            </Button>
+                        </div>
                     </div>
                 </form>
             </Modal>

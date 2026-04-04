@@ -37,10 +37,10 @@ const AllImageTable = ({ images }: any) => {
     // );
     const [state, setState] = useState({ success: false, message: "" });
 
-const formAction = async (formData:any) => {
-  const result = await handleImageAction(formData);
-  setState(result);
-};
+    const formAction = async (formData: any) => {
+        const result = await handleImageAction(formData);
+        setState(result);
+    };
 
     useEffect(() => {
         if (state?.message) {
@@ -52,8 +52,8 @@ const formAction = async (formData:any) => {
             }
         }
     }, [state]);
-    console.log(selectedItem,"dshfisdyfiodshfyiahf");
-    
+    console.log(selectedItem, "dshfisdyfiodshfyiahf");
+
     return (
         <>
             <Table className="table-auto border-spacing-0 border-separate">
@@ -172,17 +172,24 @@ const formAction = async (formData:any) => {
                 footer={null}
                 width={1024}
             >
-                <div>
-                    <div className="border-b pb-4 mb-4">
-                        <h2 className="text-xl font-semibold text-neutral-800">
+                <div className="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 p-6 dark:border rounded-lg">
+
+                    <div className="border-b border-neutral-200 dark:border-neutral-700 pb-4 mb-4">
+                        <h2 className="text-xl font-semibold">
                             View Image
                         </h2>
                     </div>
+
                     <ImageFormFields singleImage={selectedItem} type='view' />
+
                     <div className="col-span-2 flex items-center justify-center gap-3 mt-6">
                         <Button
-                            onClick={(e) => { e.preventDefault(); setModalType(null); setSelectedItem(null) }}
-                            className="h-12 w-10/12 my-5 bg-primary hover:bg-primary/80 text-white text-base rounded-lg"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setModalType(null);
+                                setSelectedItem(null);
+                            }}
+                            className="h-12 w-10/12 my-5 bg-primary hover:bg-primary/80 dark:bg-primary dark:hover:bg-primary/70 text-white text-base rounded-lg"
                         >
                             Close
                         </Button>
@@ -201,13 +208,13 @@ const formAction = async (formData:any) => {
                 width={1024}
             >
                 <form
-  onSubmit={async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    await formAction(formData);
-  }}
->
-                    <div>
+                    onSubmit={async (e) => {
+                        e.preventDefault();
+                        const formData = new FormData(e.currentTarget);
+                        await formAction(formData);
+                    }}
+                >
+                    <div className="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 p-6 dark:border rounded-md">
                         <div className="grid gap-x-5">
                             <Input
                                 type="hidden"
@@ -225,8 +232,8 @@ const formAction = async (formData:any) => {
                                 value={selectedItem?.caption}
                             />
                         </div>
-                        <div className="border-b pb-4 mb-4">
-                            <h2 className="text-xl font-semibold text-neutral-800">
+                        <div className="border-b border-neutral-200 dark:border-neutral-700 pb-4 mb-4">
+                            <h2 className="text-xl font-semibold">
                                 Update Image
                             </h2>
                         </div>
@@ -234,7 +241,7 @@ const formAction = async (formData:any) => {
                         <div className="col-span-2 flex items-center justify-center gap-3 mt-6">
                             <Button
                                 type="submit"
-                                className="h-12 w-10/12 my-5 bg-yellow-500 hover:bg-yellow-600 text-white text-base rounded-lg"
+                                className="h-12 w-10/12 my-5 bg-yellow-500 hover:bg-yellow-600 text-white text-base rounded-md"
                             >
                                 Update
                             </Button>
@@ -252,42 +259,44 @@ const formAction = async (formData:any) => {
                 width={520}
             >
                 <form
-  onSubmit={async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    await formAction(formData);
-  }}
->
-                    <div className="grid gap-x-5">
-                        <Input
-                            type="hidden"
-                            name="action"
-                            value="delete"
-                        />
-                        <Input
-                            type="hidden"
-                            name="id"
-                            value={selectedItem?.id}
-                        />
-                        <Input
-                            type="hidden"
-                            name="file_key"
-                            value={selectedItem?.file_key}
-                        />
-                    </div>
-                    <div className="border-b pb-4 mb-4">
-                        <h2 className="text-xl font-semibold text-neutral-800">
-                            Confirm Delete
-                        </h2>
-                    </div>
-                    <p className="text-center text-base">Are you sure you want to delete {selectedItem?.caption}?</p>
-                    <div className="col-span-2 flex items-center justify-center gap-3 mt-6">
-                        <Button
-                            type="submit"
-                            className="h-10 w-32 bg-red-600 hover:bg-red-700 text-white text-base rounded-lg"
-                        >
-                            Delete
-                        </Button>
+                    onSubmit={async (e) => {
+                        e.preventDefault();
+                        const formData = new FormData(e.currentTarget);
+                        await formAction(formData);
+                    }}
+                >
+                    <div className="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 p-6 dark:border rounded-md">
+                        <div className="grid gap-x-5">
+                            <Input
+                                type="hidden"
+                                name="action"
+                                value="delete"
+                            />
+                            <Input
+                                type="hidden"
+                                name="id"
+                                value={selectedItem?.id}
+                            />
+                            <Input
+                                type="hidden"
+                                name="file_key"
+                                value={selectedItem?.file_key}
+                            />
+                        </div>
+                        <div className="border-b border-neutral-200 dark:border-neutral-700 pb-4 mb-4">
+                            <h2 className="text-xl font-semibold">
+                                Confirm Delete
+                            </h2>
+                        </div>
+                        <p className="text-center text-base">Are you sure you want to delete {selectedItem?.caption}?</p>
+                        <div className="col-span-2 flex items-center justify-center gap-3 mt-6">
+                            <Button
+                                type="submit"
+                                className="h-10 w-32 bg-red-600 hover:bg-red-700 text-white text-base rounded-lg"
+                            >
+                                Delete
+                            </Button>
+                        </div>
                     </div>
                 </form>
             </Modal>

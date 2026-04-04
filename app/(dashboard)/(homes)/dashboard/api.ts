@@ -5,7 +5,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 export async function getAllTreatments() {
 
   const res = await fetch(
-    `${BASE_URL}/api/treatment/all?page=1&limit=1000`,
+    `${BASE_URL}/api/treatment/count`,
     {
       cache: "no-store"
     }
@@ -15,7 +15,7 @@ export async function getAllTreatments() {
 }
 
 export async function getBlogDashboard() {
-  const res = await fetch(`${BASE_URL}/api/blogs`, {
+  const res = await fetch(`${BASE_URL}/api/blogs/count`, {
     next: { revalidate: 60 },
   });
 
@@ -23,7 +23,7 @@ export async function getBlogDashboard() {
 }
 
 export async function getContactDashboard() {
-  const res = await fetch(`${BASE_URL}/api/contact/?page=1&limit=1000`, {
+  const res = await fetch(`${BASE_URL}/api/contact/count`, {
     next: { revalidate: 60 },
   });
 
@@ -32,7 +32,7 @@ export async function getContactDashboard() {
 
 export async function getImagesDashboard() {
   const res = await fetch(
-    `${BASE_URL}/api/images?page=1&limit=1000`,
+    `${BASE_URL}/api/images/count`,
     {
       method: "GET",
       cache: "no-store",

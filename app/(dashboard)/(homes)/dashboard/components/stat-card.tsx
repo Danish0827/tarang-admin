@@ -33,12 +33,12 @@ const StatCard = async () => {
   console.log( treatments,
     blogs,
     contacts,
-    images);
+    images,"dsadsadasd");
   
 const cardsDatas: CardData[] = [
   {
     title: "Total Treatments",
-    value: treatments?.treatment?.length,
+    value: treatments?.total,
     icon: UsersRound,
     iconBg: "bg-cyan-600",
     gradientFrom: "from-cyan-600/10",
@@ -49,7 +49,7 @@ const cardsDatas: CardData[] = [
   },
   {
     title: "Total Blogs",
-    value: blogs?.length,
+    value: blogs?.total,
     icon: Medal,
     iconBg: "bg-purple-600",
     gradientFrom: "from-purple-600/10",
@@ -60,7 +60,7 @@ const cardsDatas: CardData[] = [
   },
   {
     title: "Total Leads",
-    value: contacts?.contacts?.length,
+    value: contacts?.total,
     icon: Wallet,
     iconBg: "bg-green-600",
     gradientFrom: "from-green-600/10",
@@ -71,7 +71,7 @@ const cardsDatas: CardData[] = [
   },
   {
     title: "Total Images Uploaded",
-    value: images?.images?.length,
+    value: images?.total,
     icon: FileText,
     iconBg: "bg-red-600",
     gradientFrom: "from-red-600/10",

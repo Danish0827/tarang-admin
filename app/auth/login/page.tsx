@@ -8,9 +8,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 const metadata: Metadata = {
-  title: "Register & Create Account | WowDash Admin Dashboard",
-  description:
-    "Create a new user account and get started with the WowDash Admin Dashboard built with Next.js and Tailwind CSS.",
+  title: "Register & Create Account | Dr. Tarang Krishna Admin Dashboard",
+  description: "Dr. Tarang Krishna founded the Cancer Healer Center and is a recognized leader in integrative cancer care. Through his work, he has helped shape a patient-centered approach that focuses on supporting the body’s natural healing capacity while patients undergo conventional cancer treatments.",
 };
 
 const forgotPassImage: StaticImg = {

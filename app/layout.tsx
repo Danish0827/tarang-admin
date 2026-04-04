@@ -8,33 +8,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Wowdash - Tailwind & Next.js Admin Dashboard with shadcn UI (Typescript)",
-  description: "WowDash - Admin Dashboard Multipurpose Next.js, TypeScript, ShadCn UI & Tailwind Template",
-  metadataBase: new URL("https://wowdash-nextjs-typescript-shadcn-5fu5.vercel.app"),
-  openGraph: {
-    title: "Wowdash - Admin Dashboard UI",
-    description: "A modern, responsive admin dashboard template built with Next.js, Tailwind CSS, and ShadCN UI.",
-    url: "https://wowdash-nextjs-typescript-shadcn-5fu5.vercel.app",
-    siteName: "Wowdash",
-    images: [
-      {
-        url: "https://wowdash-nextjs-typescript-shadcn-5fu5.vercel.app/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Wowdash Admin Dashboard Preview",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Wowdash - Admin Dashboard UI",
-    description: "A modern, responsive admin dashboard template built with Next.js, Tailwind CSS, and ShadCN UI.",
-    images: ["https://wowdash-nextjs-typescript-shadcn-5fu5.vercel.app/og-image.jpg"],
-  },
+  title: "Dr. Tarang Krishna",
+  description: "Dr. Tarang Krishna founded the Cancer Healer Center and is a recognized leader in integrative cancer care. Through his work, he has helped shape a patient-centered approach that focuses on supporting the body’s natural healing capacity while patients undergo conventional cancer treatments.",
 };
-
 
 export default async function RootLayout({
   children,

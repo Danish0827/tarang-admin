@@ -24,15 +24,15 @@ const BlogCategoryData = ({
 }) => {
     const [modalType, setModalType] = useState<null | "view" | "edit" | "delete">(null);
     const [selectedItem, setSelectedItem] = useState<categoryData | null>(null);
-  const [state, setState] = useState({
-  success: false,
-  message: ""
-});
+    const [state, setState] = useState({
+        success: false,
+        message: ""
+    });
 
-const formAction = async (formData:any) => {
-  const result = await handleBlogCategoryAction(formData);
-  setState(result);
-};
+    const formAction = async (formData: any) => {
+        const result = await handleBlogCategoryAction(formData);
+        setState(result);
+    };
 
     useEffect(() => {
         if (state?.message) {
@@ -45,8 +45,8 @@ const formAction = async (formData:any) => {
         }
     }, [state]);
 
-//    console.log(blogCategory,"blogCategoryblogCategoryblogCategoryblogCategory");
-   
+    //    console.log(blogCategory,"blogCategoryblogCategoryblogCategoryblogCategory");
+
     return (
         <>
             <TableBody>
@@ -127,48 +127,58 @@ const formAction = async (formData:any) => {
                 footer={null}
                 width={520}
             >
-                <div className="space-y-5">
-                    <div className="border-b pb-4">
-                        <h2 className="text-xl font-semibold text-neutral-800">
+                {/* <div className="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 p-6 dark:border dark:border-neutral-700 rounded-md space-y-5"> */}
+                <DefaultCardComponent title={`Category Details`}>
+                    {/* <div className="border-b border-neutral-200 dark:border-neutral-700 pb-4 mb-4">
+                        <h2 className="text-xl font-semibold">
                             Category Details
                         </h2>
-                    </div>
-                    <div className="space-y-3">
-                        <div className="flex gap-2 items-start bg-neutral-50 rounded-lg px-4 py-3">
-                            <span className="text-sm text-neutral-700 font-medium">
+                    </div> */}
+
+                    <div className="space-y-3 pb-5">
+
+                        {/* Name */}
+                        <div className="flex gap-2 items-center border px-5 h-12 rounded-lg">
+                            <span className="text-sm text-neutral-700 dark:text-neutral-400 font-medium">
                                 Category Name :
                             </span>
-                            <span className="text-sm font-semibold text-neutral-800">
+                            <span className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
                                 {selectedItem?.name}
                             </span>
                         </div>
 
-                        <div className="flex gap-2 items-start bg-neutral-50 rounded-lg px-4 py-3">
-                            <span className="text-sm text-neutral-700 font-medium">
-                               Category Slug :
+                        {/* Slug */}
+                        <div className="flex gap-2 items-center border px-5 h-12 rounded-lg">
+                            <span className="text-sm text-neutral-700 dark:text-neutral-400 font-medium">
+                                Category Slug :
                             </span>
-                            <span className="text-sm font-semibold text-neutral-800">
+                            <span className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
                                 {selectedItem?.slug}
                             </span>
                         </div>
-                        <div className="flex gap-2 items-start bg-neutral-50 rounded-lg px-4 py-3">
-                            <span className="text-sm inline-block text-neutral-700 font-medium">
+
+                        {/* Description */}
+                        <div className="flex gap-2 items-start border px-5 py-3 h-20 rounded-lg">
+                            <span className="text-sm text-neutral-700 dark:text-neutral-400 font-medium">
                                 Description :
                             </span>
-                            <span className="text-sm font-semibold text-neutral-800">
+                            <span className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
                                 {selectedItem?.description || "-"}
                             </span>
                         </div>
+
                     </div>
-                    <div className="border-t pt-4 flex justify-end">
+
+                    <div className="col-span-2 flex items-center justify-center gap-3">
                         <button
                             onClick={() => setModalType(null)}
-                            className="px-5 cursor-pointer py-2 rounded-lg bg-neutral-900 hover:bg-neutral-700 text-white text-sm font-medium transition"
+                            className="h-12 w-40 cursor-pointer bg-neutral-900 hover:bg-neutral-700 capitalize text-white text-base rounded-lg"
                         >
                             Close
                         </button>
                     </div>
-                </div>
+                </DefaultCardComponent>
+                {/* </div> */}
             </Modal>
 
 
@@ -195,12 +205,13 @@ const formAction = async (formData:any) => {
                 width={520}
             >
                 <form
-  onSubmit={async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    await formAction(formData);
-  }}
->
+                    onSubmit={async (e) => {
+                        e.preventDefault();
+                        const formData = new FormData(e.currentTarget);
+                        await formAction(formData);
+                    }}
+                >
+
                     <div className="grid gap-x-5">
                         <Input
                             type="hidden"
@@ -213,20 +224,17 @@ const formAction = async (formData:any) => {
                             value={selectedItem?.id}
                         />
                     </div>
-                    <div className="border-b pb-4 mb-4">
-                        <h2 className="text-xl font-semibold text-neutral-800">
-                            Confirm Delete
-                        </h2>
-                    </div>
-                    <p className="text-center text-base">Are you sure you want to delete {selectedItem?.name}?</p>
-                    <div className="col-span-2 flex items-center justify-center gap-3 mt-6">
-                        <Button
-                            type="submit"
-                            className="h-10 w-32 bg-red-600 hover:bg-red-700 text-white text-base rounded-lg"
-                        >
-                            Delete
-                        </Button>
-                    </div>
+                    <DefaultCardComponent title={`Confirm Delete`}>
+                        <p className="text-center text-base">Are you sure you want to delete {selectedItem?.name}?</p>
+                        <div className="col-span-2 flex items-center justify-center gap-3 mt-6">
+                            <Button
+                                type="submit"
+                                className="h-10 w-32 bg-red-600 hover:bg-red-700 text-white text-base rounded-lg"
+                            >
+                                Delete
+                            </Button>
+                        </div>
+                    </DefaultCardComponent>
                 </form>
 
             </Modal>

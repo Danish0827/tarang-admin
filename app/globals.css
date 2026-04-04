@@ -511,3 +511,35 @@ html[layout="boron"] .dashboard-sidebar-container {
     padding-left: 20px;
     list-style: disc !important;
 }
+
+/* global.css */
+.ant-modal-content {
+  @apply bg-white dark:bg-neutral-900;
+}
+
+.ant-modal-header {
+  @apply bg-white dark:bg-neutral-900;
+}
+
+.ant-modal-body {
+  @apply bg-white dark:bg-neutral-900 rounded-md;
+}
+
+.ant-modal-container {
+  @apply !p-0;
+}
+
+/* Close button color */
+.ant-modal-close {
+  @apply text-neutral-500 dark:text-neutral-300;
+}
+
+/* Hover effect */
+.ant-modal-close:hover {
+  @apply text-neutral-700 dark:text-white;
+}
+
+/* Close icon inside */
+.ant-modal-close-x {
+  @apply flex items-center justify-center;
+}
