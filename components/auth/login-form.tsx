@@ -59,6 +59,8 @@ const LoginForm = () => {
   const router = useRouter();
 
  const onSubmit = async (values: z.infer<typeof loginSchema>) => {
+  console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
+  
   try {
     setLoading(true);
     setIsSubmitting(true);
