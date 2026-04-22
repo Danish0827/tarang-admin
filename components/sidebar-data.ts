@@ -1,4 +1,5 @@
 import {
+  BookCheck,
   Boxes,
   CalendarDays,
   ChartPie,
@@ -163,7 +164,7 @@ export const data = {
         {
           title: "Category",
           url: "/blogcategory",
-          circleColor: "bg-yellow-500",
+          circleColor: "bg-primary",
         },
         {
           title: "All Blogs",
@@ -189,6 +190,29 @@ export const data = {
           circleColor: "bg-primary",
         },
 
+      ],
+    },
+     {
+      title: "Booking Details",
+      url: "#",
+      icon: BookCheck,
+      isActive: true,
+      items: [
+        {
+          title: "Availability",
+          url: "/availability",
+          circleColor: "bg-yellow-500",
+        },
+        {
+          title: "Latest Bookings",
+          url: "/booking",
+          circleColor: "bg-green-600",
+        },
+        {
+          title: "Booking History",
+          url: "/history",
+          circleColor: "bg-red-600",
+        },        
       ],
     },
    

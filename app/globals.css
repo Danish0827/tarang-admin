@@ -543,3 +543,43 @@ html[layout="boron"] .dashboard-sidebar-container {
 .ant-modal-close-x {
   @apply flex items-center justify-center;
 }
+
+.ant-picker-calendar .ant-picker-cell-disabled::before {
+  background: #ffffff !important;
+}
+
+.ant-picker-calendar-date-value {
+    display: none;
+}
+
+.ant-picker-calendar .ant-picker-cell .ant-picker-cell-inner{
+  height: 100px;
+}
+.ant-picker-cell-inner.ant-picker-calendar-date {
+    width: 100%;
+}
+
+/* .ant-picker-cell
+ {
+    padding: 2px !important;
+} */
+
+/* .ant-picker-calendar 
+.ant-picker-cell-in-view.ant-picker-cell-selected:not(.ant-picker-cell-disabled) , */
+.ant-picker-cell-inner {
+  background: transparent !important;   /* light green */
+  border: none !important;
+  /* color: #389e0d !important; */
+  /* border-radius: 30px !important; */
+  border-color: #86efac !important;
+}
+
+
+table.ant-picker-content thead tr {
+    font-size: 20px;
+    text-align: center;
+}
+
+table.ant-picker-content thead tr th{
+  padding-bottom: 20px !important;
+}

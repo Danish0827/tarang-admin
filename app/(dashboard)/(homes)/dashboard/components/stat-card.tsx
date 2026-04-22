@@ -3,7 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowDown, ArrowUp, FileText, Medal, UsersRound, Wallet } from "lucide-react";
 import React from "react";
-import { getAllTreatments, getBlogDashboard, getContactDashboard, getImagesDashboard } from "../api";
+import { getAllTreatments, } from "../api";
 import Link from "next/link";
 
 interface CardData {
@@ -19,66 +19,54 @@ interface CardData {
 };
 
 const StatCard = async () => {
-  const [
-    treatments,
-    blogs,
-    contacts,
-    images,
-  ] = await Promise.all([
-    getAllTreatments(),
-    getBlogDashboard(),
-    getContactDashboard(),
-    getImagesDashboard(),
-  ]);
-  console.log( treatments,
-    blogs,
-    contacts,
-    images,"dsadsadasd");
+  const count = await getAllTreatments()
+  console.log(count,"dsadsad");
+  
   
 const cardsDatas: CardData[] = [
   {
     title: "Total Treatments",
-    value: treatments?.total,
+    value: count?.data?.treatments,
     icon: UsersRound,
     iconBg: "bg-cyan-600",
     gradientFrom: "from-cyan-600/10",
     growth: "/alltreatment",
     growthIcon: ArrowUp,
     growthColor: "text-green-600 dark:text-green-400",
-    description: `${treatments?.treatment?.length} treatments displayed`,
+    description: `${count?.data?.treatments} treatments displayed`,
   },
   {
     title: "Total Blogs",
-    value: blogs?.total,
+    value: count?.data?.blogs,
     icon: Medal,
     iconBg: "bg-purple-600",
     gradientFrom: "from-purple-600/10",
     growth: "blogs",
     growthIcon: ArrowDown,
     growthColor: "text-red-600 dark:text-red-400",
-    description: `${blogs?.length} blogs displayed`,
+    description: `${count?.data?.blogs} blogs displayed`,
   },
   {
     title: "Total Leads",
-    value: contacts?.total,
+    value: count?.data?.contacts,
     icon: Wallet,
     iconBg: "bg-green-600",
     gradientFrom: "from-green-600/10",
     growth: "/contactdetails",
     growthIcon: ArrowUp,
     growthColor: "text-green-600 dark:text-green-400",
-    description: `${contacts?.total} leads displayed`,
+    description: `${count?.data?.contacts} leads displayed`,
   },
   {
     title: "Total Images Uploaded",
-    value: images?.total,
+    value: count?.data?.images,
     icon: FileText,
     iconBg: "bg-red-600",
     gradientFrom: "from-red-600/10",
     growth: "/allmedia",
     growthIcon: ArrowUp,
     growthColor: "text-green-600 dark:text-green-400",
-    description: `${images?.total} images displayed`,
+    description: `${count?.data?.images} images displayed`,
   },
 ];
 
