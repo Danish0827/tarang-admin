@@ -27,6 +27,19 @@ export async function getHistory(page: number, limit: number) {
   return res.json();
 }
 
+export async function getLatest(page: number, limit: number) {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("access_token")?.value;
+  const res = await fetch(`${BASE_URL}/api/bookappointment/latest-bookings?page=${page}&limit=${limit}`, {
+    next: { revalidate: 60 },
+    headers: {
+      "Cookie": `access_token=${accessToken}`,
+    },
+  });
+
+  return res.json();
+}
+
 export async function bookingReschedule(data:any) {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("access_token")?.value;

@@ -204,9 +204,14 @@ export const data = {
           circleColor: "bg-yellow-500",
         },
         {
-          title: "Latest Bookings",
+          title: "All Bookings",
           url: "/booking",
           circleColor: "bg-green-600",
+        },
+        {
+          title: "Latest Bookings",
+          url: "/latest",
+          circleColor: "bg-blue-600",
         },
         {
           title: "Booking History",
