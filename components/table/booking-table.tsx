@@ -117,121 +117,152 @@ const Bookingtable = ({ booking }: any) => {
                 </TableHeader>
 
                 <TableBody>
-                    {booking?.map((item: any, index: number) => {
-                        const isLastRow = index === booking.length - 1;
-                        return (
-                            <TableRow key={index}>
-                                <TableCell
-                                    className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base first:border-s last:border-e ${isLastRow ? "rounded-bl-lg" : ""
-                                        }`}
-                                >
-                                    <div className="flex items-center gap-3">
-                                        <div
-                                            className={`w-10 h-10 flex items-center justify-center rounded-full text-white font-semibold ${colors[index % colors.length]
-                                                }`}
-                                        >
-                                            {item.user_name
-                                                ?.split(" ")
-                                                .map((n: any) => n[0])
-                                                .join("")
-                                                .slice(0, 2)
-                                                .toUpperCase()}
-                                        </div>
-                                        <span className="text-base font-semibold text-neutral-500 dark:text-neutral-300">
-                                            {item.user_name}
-                                        </span>
-                                    </div>
-                                </TableCell>
-
-                                <TableCell
-                                    className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
-                                        }`}
-                                >
-                                    {item.consultant_name}
-                                </TableCell>
-
-                                <TableCell
-                                    className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
-                                        }`}
-                                >
-                                    ₹{item.amount}
-                                </TableCell>
-                                <TableCell
-                                    className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
-                                        }`}
-                                >
-                                    {item.user_phone}
-                                </TableCell>
-                                <TableCell
-                                    className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
-                                        }`}
-                                >
-                                    {item.user_email}
-                                </TableCell>
-                                <TableCell
-                                    className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
-                                        }`}
-                                >
-                                    {format(item.booking_date, "PPP")}
-                                </TableCell>
-
-
-                                <TableCell
-                                    className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
-                                        }`}
-                                >
-                                    {item.booking_time}
-                                </TableCell>
-
-                                <TableCell
-                                    className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base first:border-s last:border-e ${isLastRow ? "" : ""
-                                        } text-center`}
-                                >
-                                    <Badge
-                                        className={`rounded-[50rem] capitalize ${item?.booking_status == 'CANCELLED' ? 'bg-red-600' : item?.booking_status == 'RESCHEDULED' ? 'bg-cyan-600' : item.booking_status == 'BOOKED' ? 'bg-green-600' : 'bg-yellow-500'}`}
+                    {booking && booking.length > 0 ? (
+                        booking?.map((item: any, index: number) => {
+                            const isLastRow = index === booking.length - 1;
+                            return (
+                                <TableRow key={index}>
+                                    <TableCell
+                                        className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base first:border-s last:border-e ${isLastRow ? "rounded-bl-lg" : ""
+                                            }`}
                                     >
-                                        {item?.booking_status}
-                                    </Badge>
-                                </TableCell>
-                                <TableCell
-                                    className={`py-4 px-4 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600 ${isLastRow ? "rounded-br-lg" : ""
-                                        }`}
-                                >
-                                    <div className="flex justify-center gap-2">
-                                        <Button onClick={() => {
-                                            setSelectedItem(item);
-                                            setModalType("view");
-                                            setSelectedDate(dayjs());
-                                            setSelectedTime(null);
-                                        }} size="icon" variant="ghost" className="rounded-[50%] text-blue-500 bg-primary/10">
-                                            <Eye className="w-5 h-5" />
-                                        </Button>
-                                        {item?.booking_status !== "CANCELLED" &&
+                                        <div className="flex items-center gap-3">
+                                            <div
+                                                className={`w-10 h-10 flex items-center justify-center rounded-full text-white font-semibold ${colors[index % colors.length]
+                                                    }`}
+                                            >
+                                                {item.user_name
+                                                    ?.split(" ")
+                                                    .map((n: any) => n[0])
+                                                    .join("")
+                                                    .slice(0, 2)
+                                                    .toUpperCase()}
+                                            </div>
+                                            <span className="text-base font-semibold text-neutral-500 dark:text-neutral-300">
+                                                {item.user_name}
+                                            </span>
+                                        </div>
+                                    </TableCell>
+
+                                    <TableCell
+                                        className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
+                                            }`}
+                                    >
+                                        {item.consultant_name}
+                                    </TableCell>
+
+                                    <TableCell
+                                        className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
+                                            }`}
+                                    >
+                                        ₹{item.amount}
+                                    </TableCell>
+                                    <TableCell
+                                        className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
+                                            }`}
+                                    >
+                                        {item.user_phone}
+                                    </TableCell>
+                                    <TableCell
+                                        className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
+                                            }`}
+                                    >
+                                        {item.user_email}
+                                    </TableCell>
+                                    <TableCell
+                                        className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
+                                            }`}
+                                    >
+                                        {format(item.booking_date, "PPP")}
+                                    </TableCell>
+
+
+                                    <TableCell
+                                        className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base text-center first:border-s last:border-e ${isLastRow ? "" : ""
+                                            }`}
+                                    >
+                                        {item.booking_time}
+                                    </TableCell>
+
+                                    <TableCell
+                                        className={`py-3.5 px-4 border-b border-neutral-200 dark:border-slate-600 text-base first:border-s last:border-e ${isLastRow ? "" : ""
+                                            } text-center`}
+                                    >
+                                        <Badge
+                                            className={`rounded-[50rem] capitalize ${item?.booking_status == 'CANCELLED' ? 'bg-red-600' : item?.booking_status == 'RESCHEDULED' ? 'bg-cyan-600' : item.booking_status == 'BOOKED' ? 'bg-green-600' : 'bg-yellow-500'}`}
+                                        >
+                                            {item?.booking_status}
+                                        </Badge>
+                                    </TableCell>
+                                    <TableCell
+                                        className={`py-4 px-4 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600 ${isLastRow ? "rounded-br-lg" : ""
+                                            }`}
+                                    >
+                                        <div className="flex justify-center gap-2">
                                             <Button onClick={() => {
                                                 setSelectedItem(item);
-                                                setModalType("edit");
-                                                setSelectedDate(dayjs(item?.booking_date));
-                                                setSelectedTime(
-                                                    slots.find((s: any) => s.label === item.booking_time)
-                                                );
-                                                setRescheduleNote(item.note);
-                                            }} size="icon" variant="ghost" className="rounded-[50%] text-green-600 bg-green-600/10">
-                                                <Edit className="w-5 h-5" />
-                                            </Button>}
-                                        {item?.booking_status !== "CANCELLED" &&
-                                            <Button onClick={() => {
-                                                setSelectedItem(item);
-                                                setModalType("delete");
+                                                setModalType("view");
                                                 setSelectedDate(dayjs());
                                                 setSelectedTime(null);
-                                            }} size="icon" variant="ghost" className="rounded-[50%] text-red-500 bg-red-500/10">
-                                                <Trash2 className="w-5 h-5" />
-                                            </Button>}
+                                            }} size="icon" variant="ghost" className="rounded-[50%] text-blue-500 bg-primary/10">
+                                                <Eye className="w-5 h-5" />
+                                            </Button>
+                                            {item?.booking_status !== "CANCELLED" &&
+                                                <Button onClick={() => {
+                                                    setSelectedItem(item);
+                                                    setModalType("edit");
+                                                    setSelectedDate(dayjs(item?.booking_date));
+                                                    setSelectedTime(
+                                                        slots.find((s: any) => s.label === item.booking_time)
+                                                    );
+                                                    setRescheduleNote(item.note);
+                                                }} size="icon" variant="ghost" className="rounded-[50%] text-green-600 bg-green-600/10">
+                                                    <Edit className="w-5 h-5" />
+                                                </Button>}
+                                            {item?.booking_status !== "CANCELLED" &&
+                                                <Button onClick={() => {
+                                                    setSelectedItem(item);
+                                                    setModalType("delete");
+                                                    setSelectedDate(dayjs());
+                                                    setSelectedTime(null);
+                                                }} size="icon" variant="ghost" className="rounded-[50%] text-red-500 bg-red-500/10">
+                                                    <Trash2 className="w-5 h-5" />
+                                                </Button>}
+                                        </div>
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })
+                    ) : (
+                        <TableRow>
+                            <TableCell colSpan={9} className="py-16 border border-neutral-200 dark:border-slate-600 rounded-b-2xl">
+                                <div className="flex flex-col items-center justify-center text-center gap-4 ">
+                                    {/* Icon */}
+                                    <div className="w-16 h-16 flex items-center justify-center rounded-full bg-neutral-100 dark:bg-slate-700">
+                                        <svg
+                                            className="w-8 h-8 text-neutral-400 dark:text-neutral-500"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="1.5"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                d="M9 13h6m-6 4h6M7 3h10a2 2 0 012 2v14l-4-2-4 2-4-2-4 2V5a2 2 0 012-2z"
+                                            />
+                                        </svg>
                                     </div>
-                                </TableCell>
-                            </TableRow>
-                        );
-                    })}
+                                    {/* Title */}
+                                    <h3 className="text-lg font-semibold text-neutral-700 dark:text-neutral-200">
+                                        No bookings yet
+                                    </h3>
+                                    {/* Subtitle */}
+                                    <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                                        Looks like there are no recent bookings. Once users start booking, they will appear here.
+                                    </p>
+                                </div>
+                            </TableCell>
+                        </TableRow>
+                    )}
                 </TableBody>
             </Table>
             <Modal
@@ -335,16 +366,16 @@ const Bookingtable = ({ booking }: any) => {
                             Back
                         </button>
                         {selectedItem?.booking_status !== "CANCELLED" &&
-                        <button
-                            type="button"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                window.open("https://us05web.zoom.us/j/2678102586?pwd=ctHbbcJRIdY6plpe2hdCKyAa64l089.1", "_blank", "noopener,noreferrer");
-                            }}
-                            className="px-6 h-12 text-base rounded-lg bg-black text-white hover:bg-black/80 cursor-pointer"
-                        >
-                            Join Now
-                        </button>}
+                            <button
+                                type="button"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    window.open("https://us05web.zoom.us/j/2678102586?pwd=ctHbbcJRIdY6plpe2hdCKyAa64l089.1", "_blank", "noopener,noreferrer");
+                                }}
+                                className="px-6 h-12 text-base rounded-lg bg-black text-white hover:bg-black/80 cursor-pointer"
+                            >
+                                Join Now
+                            </button>}
                     </div>
                 </div>
             </Modal>

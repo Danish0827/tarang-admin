@@ -164,6 +164,8 @@ const AdminAvailability = () => {
         );
 
         setIsAvailable(res.data.is_available);
+        console.log(res.data.is_available,"res.data.is_available");
+        
 
         if (res.data.slots?.length) {
             setSlots(
