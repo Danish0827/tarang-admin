@@ -40,7 +40,7 @@ const AdminAvailability = () => {
             setLoading(true);
             setError(null);
 
-            const res = await axios.get("http://localhost:5000/api/available/dates", {
+            const res = await axios.get("https://backend.drtarangkrishna.com/api/available/dates", {
                 params: {
                     user_id: USER_ID,
                     start: dayjs().format("YYYY-MM-DD"),
@@ -154,7 +154,7 @@ const AdminAvailability = () => {
         setIsModalOpen(true);
 
         const res = await axios.get(
-            "http://localhost:5000/api/available/day-detail",
+            "https://backend.drtarangkrishna.com/api/available/day-detail",
             {
                 params: {
                     user_id: USER_ID,
@@ -207,7 +207,7 @@ const AdminAvailability = () => {
                 end: dayjs(s.end, "hh:mm A").format("HH:mm"),
             }));
 
-        await axios.post("http://localhost:5000/api/available/override", {
+        await axios.post("https://backend.drtarangkrishna.com/api/available/override", {
             user_id: USER_ID,
             date: selectedDate.format("YYYY-MM-DD"),
             is_available: isAvailable,
