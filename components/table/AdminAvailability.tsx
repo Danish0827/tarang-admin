@@ -17,7 +17,10 @@ import updateLocale from "dayjs/plugin/updateLocale";
 import axios from "axios";
 import { ChevronLeft, ChevronRight, Plus, Trash2 } from "lucide-react";
 import { CardHeader } from "../ui/card";
+import WeeklyHours from "./WeeklyHours";
+import { ConfigProvider, theme } from "antd";
 
+const { darkAlgorithm, defaultAlgorithm } = theme;
 const { Title, Text } = Typography;
 
 const USER_ID = "fb5c2438-8431-48df-b6e1-74da228192e1";
@@ -125,7 +128,6 @@ const AdminAvailability = () => {
             border = "#86efac";
             color = "#16a34a";
         }
-
         return (
             <div
                 style={{
@@ -141,6 +143,7 @@ const AdminAvailability = () => {
                     justifyContent: "center",
                     fontWeight: 500,
                     fontSize: '17px',
+                    color: 'black',
                 }}
             >
                 {value.date()}
@@ -164,8 +167,8 @@ const AdminAvailability = () => {
         );
 
         setIsAvailable(res.data.is_available);
-        console.log(res.data.is_available,"res.data.is_available");
-        
+        console.log(res.data.is_available, "res.data.is_available");
+
 
         if (res.data.slots?.length) {
             setSlots(
@@ -221,7 +224,49 @@ const AdminAvailability = () => {
     console.log(slots, "slotsslotsslotsslots");
 
     const [value, setValue] = useState(dayjs());
+    const initialAvailability = {
+        1: [ // Sunday
+            { start: "09:00", end: "17:00" },
+            { start: "18:00", end: "19:00" },
+        ],
+        2: [ // Monday
+            { start: "09:00", end: "19:00" },
+        ],
+        3: [ // Tuesday
+            { start: "09:00", end: "19:00" },
+        ],
+        4: [ // Wednesday
+            { start: "09:00", end: "17:00" },
+        ],
+        5: [ // Thursday
+            { start: "09:00", end: "17:00" },
+        ],
+        6: [ // Friday
+            { start: "09:00", end: "19:00" },
+        ],
+        7: [ // Saturday
+            { start: "09:00", end: "17:00" },
+            { start: "18:00", end: "19:00" },
+        ],
+    };
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
+    useEffect(() => {
+        const checkDark = () => {
+            setIsDarkMode(document.documentElement.classList.contains("dark"));
+        };
+
+        checkDark();
+
+        // agar tum toggle karte ho dynamically
+        const observer = new MutationObserver(checkDark);
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        return () => observer.disconnect();
+    }, []);
     return (
         <>{loading ? (
             <div className="flex items-center justify-center min-h-[300px]">
@@ -243,190 +288,197 @@ const AdminAvailability = () => {
                 </div>
             </div>
         ) :
-            <div
-                className="select-none"
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    // padding: "40px 20px",
-                    // background: "#f9fafb",
-                    // minHeight: "100vh",
+            <ConfigProvider
+                theme={{
+                    algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
                 }}
             >
-                <Card className="card h-full border-0 overflow-hidden ">
-                    <CardHeader className="border-b border-neutral-200 dark:border-slate-600 px-6 flex items-center flex-wrap gap-3 justify-between mb-10">
-                        <Title level={4}>Set Availability</Title>
-                        <div className="md:flex justify-between gap-5 items-center">
-                            <ChevronLeft
-                                size={35}
-                                onClick={prevMonth}
-                                style={{
-                                    cursor: value.isSame(dayjs(), "month") ? "not-allowed" : "pointer",
-                                    opacity: value.isSame(dayjs(), "month") ? 0.3 : 1,
-                                }}
-                            />
-                            <span style={{ fontWeight: 600, fontSize: 16 }}>
-                                {value.format("MMMM YYYY")}
-                            </span>
+                <div
+                    className="select-none dark:bg-neutral-900"
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        // padding: "40px 20px",
+                        // background: "#f9fafb",
+                        // minHeight: "100vh",
+                    }}
+                ><WeeklyHours initialData={initialAvailability} />
+                    <Card className="card h-full border-0 overflow-hidden dark:bg-neutral-900 ">
+                        <CardHeader className="border-b border-neutral-200 dark:border-slate-600 px-6 flex items-center flex-wrap gap-3 justify-between mb-10 ">
+                            <Title level={4}>Set Availability</Title>
+                            <div className="md:flex justify-between gap-5 items-center">
+                                <ChevronLeft
+                                    size={35}
+                                    onClick={prevMonth}
+                                    style={{
+                                        cursor: value.isSame(dayjs(), "month") ? "not-allowed" : "pointer",
+                                        opacity: value.isSame(dayjs(), "month") ? 0.3 : 1,
+                                    }}
+                                />
+                                <span style={{ fontWeight: 600, fontSize: 16 }}>
+                                    {value.format("MMMM YYYY")}
+                                </span>
 
-                            <ChevronRight
-                                size={35}
-                                onClick={nextMonth}
-                                style={{
-                                    cursor: value.isSame(dayjs().add(3, "month"), "month") ? "not-allowed" : "pointer",
-                                    opacity: value.isSame(dayjs().add(3, "month"), "month") ? 0.3 : 1,
-                                }}
-                            />
-                        </div>
-                    </CardHeader>
-                    <Calendar
-                        fullscreen={true}
-                        value={value}
-                        onPanelChange={(val) => setValue(val)}
-                        onSelect={onSelect}
-                        cellRender={(current, info) =>
-                            info.type === "date"
-                                ? dateCellRender(current)
-                                : info.originNode
-                        }
-                        headerRender={() => null}
-                        disabledDate={(current) =>
-                            current &&
-                            (current < today.startOf("day") ||
-                                current > maxDate.endOf("day"))
-                        }
-                    />
-                </Card>
+                                <ChevronRight
+                                    size={35}
+                                    onClick={nextMonth}
+                                    style={{
+                                        cursor: value.isSame(dayjs().add(3, "month"), "month") ? "not-allowed" : "pointer",
+                                        opacity: value.isSame(dayjs().add(3, "month"), "month") ? 0.3 : 1,
+                                    }}
+                                />
+                            </div>
+                        </CardHeader>
+                        <Calendar
+                            className="text-black"
+                            fullscreen={true}
+                            value={value}
+                            onPanelChange={(val) => setValue(val)}
+                            onSelect={onSelect}
+                            cellRender={(current, info) =>
+                                info.type === "date"
+                                    ? dateCellRender(current)
+                                    : info.originNode
+                            }
+                            headerRender={() => null}
+                            disabledDate={(current) =>
+                                current &&
+                                (current < today.startOf("day") ||
+                                    current > maxDate.endOf("day"))
+                            }
+                        />
+                    </Card>
 
-                <Modal
-                    open={isModalOpen}
-                    onCancel={() => setIsModalOpen(false)}
-                    footer={null}
-                    centered
-                    width={560}
-                >
-                    {/* <div className="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200"> */}
+                    <Modal
+                        open={isModalOpen}
+                        onCancel={() => setIsModalOpen(false)}
+                        footer={null}
+                        centered
+                        width={560}
+                    >
+                        {/* <div className="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200"> */}
                         {/* Header */}
                         <div className="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 p-6 dark:border rounded-md">
-                        <div className="border-b flex items-center gap-3 border-neutral-200 dark:border-neutral-700 pb-2 mb-6">
-                            <Title level={4}>
-                                {selectedDate?.format("DD MMM YYYY")} 
-                            </Title>
-                            <div className="mb-1">
-                            <Switch checked={isAvailable} size="default" onChange={setIsAvailable} />
-                        </div>
-                        </div>
+                            <div className="border-b flex items-center gap-3 border-neutral-200 dark:border-neutral-700 pb-2 mb-6">
+                                <Title level={4}>
+                                    {selectedDate?.format("DD MMM YYYY")}
+                                </Title>
+                                <div className="mb-1">
+                                    <Switch checked={isAvailable} size="default" onChange={setIsAvailable} />
+                                </div>
+                            </div>
 
-                        <Space direction="vertical" style={{ width: "100%" }}></Space>
-                        
-                        {/* Body */}
-                        <div className="px-3 pb-6">
-                            <Space direction="vertical" size="middle" style={{ width: "100%" }}>
-                                <Text strong>Time Slots</Text>
-                                {isAvailable ? (
-                                    <>
-                                        {slots.map((slot, i) => (
-                                            <Card
-                                                key={i}
-                                                size="small"
-                                                style={{
-                                                    borderRadius: 14,
-                                                    background: "#fafafa",
-                                                }}
-                                                bodyStyle={{ padding: 12 }}
-                                            >
-                                                <Space
+                            <Space direction="vertical" style={{ width: "100%" }}></Space>
+
+                            {/* Body */}
+                            <div className="px-3 pb-6">
+                                <Space direction="vertical" size="middle" style={{ width: "100%" }}>
+                                    <Text strong>Time Slots</Text>
+                                    {isAvailable ? (
+                                        <>
+                                            {slots.map((slot, i) => (
+                                                <Card
+                                                    key={i}
+                                                    size="small"
                                                     style={{
-                                                        width: "100%",
-                                                        justifyContent: "space-between",
+                                                        borderRadius: 14,
+                                                        background: "#fafafa",
                                                     }}
+                                                    bodyStyle={{ padding: 12 }}
                                                 >
-                                                    <Space>
-                                                        <Select
-                                                            style={{ width: 120 }}
-                                                            placeholder="Start"
-                                                            value={slot.start || undefined}
-                                                            onChange={(val) =>
-                                                                updateSlot(i, "start", val)
-                                                            }
-                                                            options={timeOptions.map((t) => ({
-                                                                label: t,
-                                                                value: t,
-                                                            }))}
-                                                        />
+                                                    <Space
+                                                        style={{
+                                                            width: "100%",
+                                                            justifyContent: "space-between",
+                                                        }}
+                                                    >
+                                                        <Space>
+                                                            <Select
+                                                                style={{ width: 120 }}
+                                                                placeholder="Start"
+                                                                value={slot.start || undefined}
+                                                                onChange={(val) =>
+                                                                    updateSlot(i, "start", val)
+                                                                }
+                                                                options={timeOptions.map((t) => ({
+                                                                    label: t,
+                                                                    value: t,
+                                                                }))}
+                                                            />
 
-                                                        <Text type="secondary">to</Text>
+                                                            <Text type="secondary">to</Text>
 
-                                                        <Select
-                                                            style={{ width: 120 }}
-                                                            placeholder="End"
-                                                            value={slot.end || undefined}
-                                                            onChange={(val) =>
-                                                                updateSlot(i, "end", val)
-                                                            }
-                                                            options={timeOptions.map((t) => ({
-                                                                label: t,
-                                                                value: t,
-                                                            }))}
+                                                            <Select
+                                                                style={{ width: 120 }}
+                                                                placeholder="End"
+                                                                value={slot.end || undefined}
+                                                                onChange={(val) =>
+                                                                    updateSlot(i, "end", val)
+                                                                }
+                                                                options={timeOptions.map((t) => ({
+                                                                    label: t,
+                                                                    value: t,
+                                                                }))}
+                                                            />
+                                                        </Space>
+
+                                                        <Button
+                                                            danger
+                                                            type="text"
+                                                            onClick={() => removeSlot(i)}
+                                                            icon={<Trash2 size={16} />}
                                                         />
                                                     </Space>
+                                                </Card>
+                                            ))}
 
-                                                    <Button
-                                                        danger
-                                                        type="text"
-                                                        onClick={() => removeSlot(i)}
-                                                        icon={<Trash2 size={16} />}
-                                                    />
-                                                </Space>
-                                            </Card>
-                                        ))}
+                                            <Button
+                                                type="dashed"
+                                                onClick={addSlot}
+                                                block
+                                                style={{
+                                                    height: 42,
+                                                    borderRadius: 12,
+                                                }}
+                                                icon={<Plus size={16} />}
+                                            >
+                                                Add Time Slot
+                                            </Button>
+                                        </>
+                                    ) : (
+                                        <div className="text-center py-6 text-neutral-400">
+                                            Not available for this day
+                                        </div>
+                                    )}
+                                </Space>
+                            </div>
 
-                                        <Button
-                                            type="dashed"
-                                            onClick={addSlot}
-                                            block
-                                            style={{
-                                                height: 42,
-                                                borderRadius: 12,
-                                            }}
-                                            icon={<Plus size={16} />}
-                                        >
-                                            Add Time Slot
-                                        </Button>
-                                    </>
-                                ) : (
-                                    <div className="text-center py-6 text-neutral-400">
-                                        Not available for this day
-                                    </div>
-                                )}
-                            </Space>
+                            {/* Footer */}
+                            <div className="px-6 py-4 border-t border-neutral-200 dark:border-neutral-700 flex justify-end gap-3">
+
+                                <Button
+                                    onClick={() => setIsModalOpen(false)}
+                                    style={{ height: 40, borderRadius: 10 }}
+                                >
+                                    Cancel
+                                </Button>
+
+                                <Button
+                                    type="primary"
+                                    onClick={handleSave}
+                                    style={{
+                                        height: 40,
+                                        borderRadius: 10,
+                                        paddingInline: 20,
+                                    }}
+                                >
+                                    Save Changes
+                                </Button>
+                            </div>
                         </div>
-
-                        {/* Footer */}
-                        <div className="px-6 py-4 border-t border-neutral-200 dark:border-neutral-700 flex justify-end gap-3">
-
-                            <Button
-                                onClick={() => setIsModalOpen(false)}
-                                style={{ height: 40, borderRadius: 10 }}
-                            >
-                                Cancel
-                            </Button>
-
-                            <Button
-                                type="primary"
-                                onClick={handleSave}
-                                style={{
-                                    height: 40,
-                                    borderRadius: 10,
-                                    paddingInline: 20,
-                                }}
-                            >
-                                Save Changes
-                            </Button>
-                        </div>
-                    </div>
-                </Modal>
-            </div>
+                    </Modal>
+                </div>
+            </ConfigProvider>
         }</>
 
     );

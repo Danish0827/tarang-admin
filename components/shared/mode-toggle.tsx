@@ -42,12 +42,12 @@ export function ModeToggle() {
         >
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem
+        {/* <DropdownMenuItem
           onClick={() => setTheme("system")}
           className="cursor-pointer"
         >
           System
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
   );

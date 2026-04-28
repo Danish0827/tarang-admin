@@ -412,7 +412,7 @@ const Bookingtable = ({ booking }: any) => {
                                 {selectedItem?.user_name}
                             </span>.
                         </p>
-                        <div className="grid grid-cols-2 gap-6">
+                        <div className="grid grid-cols-2 gap-6 dark:bg-neutral-900 dark:text-white ">
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DateCalendar
                                     minDate={today}
@@ -431,7 +431,7 @@ const Bookingtable = ({ booking }: any) => {
                                             onClick={() => setSelectedTime(slot)}
                                             className={`p-3 border rounded-lg  cursor-pointer ${selectedTime?.id === slot.id
                                                 ? "bg-indigo-600 text-white"
-                                                : "hover:bg-gray-100"
+                                                : "hover:bg-gray-100 dark:hover:text-neutral-900"
                                                 }`}
                                         >
                                             {slot.label}

@@ -45,7 +45,7 @@ const LightDarkMode = () => {
                         onClick={() => setTheme("dark")}
                     >Dark</h6>
                 </div>
-                <div className="">
+                {/* <div className="">
                     <div
                         className={`cursor-pointer border border-neutral-300 flex items-center justify-center hover:bg-primary/10 duration-300 h-[68px] rounded-md ring-2 dark:border-slate-500 ${theme === "system" ? "ring-primary text-primary dark:text-primary" : "ring-transparent text-neutral-500 dark:text-white"}`}
                         onClick={() => setTheme("system")}
@@ -56,7 +56,7 @@ const LightDarkMode = () => {
                         className={`text-center text-sm font-medium pt-2 cursor-pointer hover:text-blue-500 ${theme === "system" ? "text-primary dark:text-primary" : "text-neutral-500 dark:text-neutral-200"}`}
                         onClick={() => setTheme("system")}
                     >System</h6>
-                </div>
+                </div> */}
 
             </div>
         </div>
