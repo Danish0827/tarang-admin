@@ -302,7 +302,8 @@ const AdminAvailability = () => {
                         // background: "#f9fafb",
                         // minHeight: "100vh",
                     }}
-                ><WeeklyHours initialData={initialAvailability} />
+                >
+                    {/* <WeeklyHours initialData={initialAvailability} /> */}
                     <Card className="card h-full border-0 overflow-hidden dark:bg-neutral-900 ">
                         <CardHeader className="border-b border-neutral-200 dark:border-slate-600 px-6 flex items-center flex-wrap gap-3 justify-between mb-10 ">
                             <Title level={4}>Set Availability</Title>
